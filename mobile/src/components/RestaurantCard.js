@@ -28,12 +28,19 @@ const RestaurantCard = ({ restaurant, onPress, variant = 'default' }) => {
 
   return (
     <TouchableOpacity
-      style={[styles.container, variant === 'large' && styles.containerLarge]}
+      style={[
+        styles.container,
+        variant === 'large' && styles.containerLarge,
+        variant === 'grid' && styles.containerGrid
+      ]}
       onPress={() => onPress(restaurant)}
       activeOpacity={0.8}
     >
       {/* Image with overlays */}
-      <View style={[styles.imageContainer, variant === 'large' && styles.imageContainerLarge]}>
+      <View style={[
+        styles.imageContainer,
+        (variant === 'large' || variant === 'grid') && styles.imageContainerLarge
+      ]}>
         <Image
           source={{ uri: restaurant.image }}
           style={styles.image}
@@ -86,6 +93,10 @@ const styles = StyleSheet.create({
     ...SHADOWS.md,
   },
   containerLarge: {
+    width: '100%',
+    marginRight: 0,
+  },
+  containerGrid: {
     width: '100%',
     marginRight: 0,
   },

@@ -1,12 +1,16 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { COLORS, SPACING, FONT_SIZES, BORDER_RADIUS } from '../constants/theme';
 
 const LocationHeader = ({ location, onPress }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.headerIconBox} onPress={onPress}>
-        <Text style={styles.icon}>📍</Text>
+        <Image
+          source={require('../../assets/location.png')}
+          style={styles.locationIcon}
+          resizeMode="contain"
+        />
       </TouchableOpacity>
 
       <View style={styles.textContainer}>
@@ -21,8 +25,11 @@ const LocationHeader = ({ location, onPress }) => {
 
       <TouchableOpacity style={styles.headerIconBox}>
         <View style={styles.iconWrapper}>
-          <Text style={styles.icon}>🔔</Text>
-          <View style={styles.notificationDot} />
+          <Image
+            source={require('../../assets/notif.png')}
+            style={styles.notifIcon}
+            resizeMode="contain"
+          />
         </View>
       </TouchableOpacity>
     </View>
@@ -40,13 +47,16 @@ const styles = StyleSheet.create({
   headerIconBox: {
     width: 44,
     height: 44,
-    backgroundColor: COLORS.headerBox,
-    borderRadius: BORDER_RADIUS.md,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  icon: {
-    fontSize: 20,
+  locationIcon: {
+    width: 42,
+    height: 42,
+  },
+  notifIcon: {
+    width: 42,
+    height: 42,
   },
   iconWrapper: {
     position: 'relative',

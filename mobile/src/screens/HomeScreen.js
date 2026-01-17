@@ -85,27 +85,27 @@ const HomeContent = ({
         onFilterPress={handleFilterPress}
       />
 
-      {searchQuery.length > 0 ? (
-        // Search Results View
+      {(searchQuery.length > 0 || selectedCategory) ? (
+        // Grid View for Search/Category Results
         <View style={styles.section}>
           <Text style={[styles.sectionTitle, { marginLeft: SPACING.lg, marginBottom: SPACING.md }]}>
-            Search Results
+            {searchQuery ? 'Search Results' : 'Available Restaurants'}
           </Text>
           {allFilteredRestaurants.length > 0 ? (
-            <View style={{ paddingHorizontal: SPACING.lg }}>
+            <View style={styles.gridContainer}>
               {allFilteredRestaurants.map((restaurant) => (
-                <View key={restaurant.id} style={{ marginBottom: SPACING.md, alignItems: 'center' }}>
+                <View key={restaurant.id} style={styles.gridItem}>
                   <RestaurantCard
                     restaurant={restaurant}
                     onPress={handleRestaurantPress}
-                    variant="large"
+                    variant="grid"
                   />
                 </View>
               ))}
             </View>
           ) : (
-            <Text style={{ marginLeft: SPACING.lg, fontFamily: 'Saans', color: COLORS.textSecondary }}>
-              No restaurants found matching "{searchQuery}"
+            <Text style={styles.emptyText}>
+              No restaurants found.
             </Text>
           )}
         </View>
@@ -279,6 +279,22 @@ const styles = StyleSheet.create({
   },
   bottomPadding: {
     height: 100,
+  },
+  gridContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    paddingHorizontal: SPACING.lg,
+    justifyContent: 'space-between',
+  },
+  gridItem: {
+    width: '48%',
+    marginBottom: SPACING.lg,
+  },
+  emptyText: {
+    marginLeft: SPACING.lg,
+    fontFamily: 'Saans',
+    color: COLORS.textSecondary,
+    fontSize: FONT_SIZES.md,
   },
 });
 
