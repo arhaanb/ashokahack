@@ -5,6 +5,7 @@ export interface RescueBag {
     id: string;
     merchantId: string;
     merchantName: string;
+    name: string;
     category: BagCategory;
     price: number;
     originalValue: number;

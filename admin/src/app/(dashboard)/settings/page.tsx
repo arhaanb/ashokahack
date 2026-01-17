@@ -7,13 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
 import { restaurantInfo } from "@/lib/mockData";
 import { cn } from "@/lib/utils";
-import { Store, Clock, Bell, Save } from "lucide-react";
+import { Store, Clock, Save, Check } from "lucide-react";
 
 export default function SettingsPage() {
-    const [activeTab, setActiveTab] = useState("restaurant");
+    const [activeTab, setActiveTab] = useState("profile");
     const [saved, setSaved] = useState(false);
 
     const handleSave = () => {
@@ -22,16 +21,15 @@ export default function SettingsPage() {
     };
 
     const tabs = [
-        { key: "restaurant", label: "Restaurant Info", icon: Store },
-        { key: "hours", label: "Bag Settings", icon: Clock },
-        { key: "notifications", label: "Notifications", icon: Bell },
+        { key: "profile", label: "Profile", icon: Store },
+        { key: "pickup", label: "Pickup Settings", icon: Clock },
     ];
 
     return (
         <>
             <Header
                 title="Settings"
-                subtitle="Manage your restaurant settings"
+                subtitle="Manage your restaurant"
             />
 
             <div className="p-6">
@@ -58,21 +56,30 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="max-w-2xl space-y-6">
-                    {/* Restaurant Info */}
-                    {activeTab === 'restaurant' && (
+                    {/* Profile Tab */}
+                    {activeTab === 'profile' && (
                         <>
                             <Card className="bg-spare-bg-light border-white/5">
                                 <CardHeader>
-                                    <CardTitle className="text-white">Restaurant Details</CardTitle>
-                                    <CardDescription>Basic information about your restaurant</CardDescription>
+                                    <CardTitle className="text-white">Restaurant Profile</CardTitle>
+                                    <CardDescription className="font-serif">Your restaurant information as shown to customers</CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="name">Restaurant Name</Label>
+                                        <Input
+                                            id="name"
+                                            defaultValue={restaurantInfo.name}
+                                            className="bg-spare-bg border-white/10 text-white"
+                                        />
+                                    </div>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                         <div className="space-y-2">
-                                            <Label htmlFor="name">Restaurant Name</Label>
+                                            <Label htmlFor="phone">Phone</Label>
                                             <Input
-                                                id="name"
-                                                defaultValue={restaurantInfo.name}
+                                                id="phone"
+                                                type="tel"
+                                                defaultValue={restaurantInfo.phone}
                                                 className="bg-spare-bg border-white/10 text-white"
                                             />
                                         </div>
@@ -85,54 +92,81 @@ export default function SettingsPage() {
                                                 className="bg-spare-bg border-white/10 text-white"
                                             />
                                         </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="phone">Phone</Label>
-                                            <Input
-                                                id="phone"
-                                                type="tel"
-                                                defaultValue={restaurantInfo.phone}
-                                                className="bg-spare-bg border-white/10 text-white"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="city">City</Label>
-                                            <Input
-                                                id="city"
-                                                defaultValue={restaurantInfo.city}
-                                                className="bg-spare-bg border-white/10 text-white"
-                                            />
-                                        </div>
                                     </div>
                                     <div className="space-y-2">
                                         <Label htmlFor="address">Address</Label>
                                         <Input
                                             id="address"
-                                            defaultValue={restaurantInfo.address}
+                                            defaultValue={`${restaurantInfo.address}, ${restaurantInfo.city}`}
                                             className="bg-spare-bg border-white/10 text-white"
                                         />
                                     </div>
                                 </CardContent>
                             </Card>
 
-                            <div className="flex justify-end gap-3">
-                                <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
-                                    Cancel
-                                </Button>
-                                <Button onClick={handleSave} className="bg-accent hover:bg-accent-hover text-spare-bg">
-                                    <Save className="w-4 h-4 mr-2" />
-                                    {saved ? "Saved!" : "Save Changes"}
+                            <Card className="bg-spare-bg-light border-white/5">
+                                <CardHeader>
+                                    <CardTitle className="text-white">Account</CardTitle>
+                                    <CardDescription className="font-serif">Manage your login credentials</CardDescription>
+                                </CardHeader>
+                                <CardContent className="space-y-4">
+                                    <div className="space-y-2">
+                                        <Label htmlFor="current-password">Current Password</Label>
+                                        <Input
+                                            id="current-password"
+                                            type="password"
+                                            placeholder="Enter current password"
+                                            className="bg-spare-bg border-white/10 text-white placeholder:text-muted-foreground"
+                                        />
+                                    </div>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="new-password">New Password</Label>
+                                            <Input
+                                                id="new-password"
+                                                type="password"
+                                                placeholder="Enter new password"
+                                                className="bg-spare-bg border-white/10 text-white placeholder:text-muted-foreground"
+                                            />
+                                        </div>
+                                        <div className="space-y-2">
+                                            <Label htmlFor="confirm-password">Confirm Password</Label>
+                                            <Input
+                                                id="confirm-password"
+                                                type="password"
+                                                placeholder="Confirm new password"
+                                                className="bg-spare-bg border-white/10 text-white placeholder:text-muted-foreground"
+                                            />
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+
+                            <div className="flex justify-end">
+                                <Button onClick={handleSave} className="bg-pink hover:bg-pink-hover text-spare-bg">
+                                    {saved ? (
+                                        <>
+                                            <Check className="w-4 h-4 mr-2" />
+                                            Saved
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Save className="w-4 h-4 mr-2" />
+                                            Save Changes
+                                        </>
+                                    )}
                                 </Button>
                             </div>
                         </>
                     )}
 
-                    {/* Bag Settings */}
-                    {activeTab === 'hours' && (
+                    {/* Pickup Settings Tab */}
+                    {activeTab === 'pickup' && (
                         <>
                             <Card className="bg-spare-bg-light border-white/5">
                                 <CardHeader>
-                                    <CardTitle className="text-white">Default Pickup Hours</CardTitle>
-                                    <CardDescription>Default time window for new rescue bags</CardDescription>
+                                    <CardTitle className="text-white">Default Pickup Window</CardTitle>
+                                    <CardDescription className="font-serif">Set the default pickup time when creating new bags</CardDescription>
                                 </CardHeader>
                                 <CardContent>
                                     <div className="grid grid-cols-2 gap-4">
@@ -160,75 +194,69 @@ export default function SettingsPage() {
 
                             <Card className="bg-spare-bg-light border-white/5">
                                 <CardHeader>
-                                    <CardTitle className="text-white">Bag Categories</CardTitle>
-                                    <CardDescription>Enable or disable categories you offer</CardDescription>
+                                    <CardTitle className="text-white">Default Pricing</CardTitle>
+                                    <CardDescription className="font-serif">Set default values for new rescue bags</CardDescription>
                                 </CardHeader>
-                                <CardContent className="space-y-4">
-                                    {[
-                                        { id: "mixed_bakery", label: "Mixed Bakery", enabled: true },
-                                        { id: "pastries", label: "Pastries", enabled: true },
-                                        { id: "breads", label: "Breads", enabled: true },
-                                        { id: "snacks", label: "Snacks", enabled: false },
-                                    ].map((category) => (
-                                        <div key={category.id} className="flex items-center justify-between">
-                                            <Label htmlFor={category.id} className="text-white font-normal">
-                                                {category.label}
-                                            </Label>
-                                            <Switch id={category.id} defaultChecked={category.enabled} />
+                                <CardContent>
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <div className="space-y-2">
+                                            <Label htmlFor="defaultPrice">Default Price (₹)</Label>
+                                            <Input
+                                                id="defaultPrice"
+                                                type="number"
+                                                defaultValue="120"
+                                                className="bg-spare-bg border-white/10 text-white"
+                                            />
                                         </div>
-                                    ))}
+                                        <div className="space-y-2">
+                                            <Label htmlFor="defaultOriginal">Original Value (₹)</Label>
+                                            <Input
+                                                id="defaultOriginal"
+                                                type="number"
+                                                defaultValue="400"
+                                                className="bg-spare-bg border-white/10 text-white"
+                                            />
+                                        </div>
+                                    </div>
                                 </CardContent>
                             </Card>
 
-                            <div className="flex justify-end gap-3">
-                                <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
-                                    Cancel
-                                </Button>
-                                <Button onClick={handleSave} className="bg-accent hover:bg-accent-hover text-spare-bg">
-                                    <Save className="w-4 h-4 mr-2" />
-                                    {saved ? "Saved!" : "Save Changes"}
-                                </Button>
-                            </div>
-                        </>
-                    )}
-
-                    {/* Notifications */}
-                    {activeTab === 'notifications' && (
-                        <>
                             <Card className="bg-spare-bg-light border-white/5">
                                 <CardHeader>
-                                    <CardTitle className="text-white">Order Notifications</CardTitle>
-                                    <CardDescription>Choose which notifications you receive</CardDescription>
+                                    <CardTitle className="text-white">Preferences</CardTitle>
+                                    <CardDescription className="font-serif">Quick settings for your rescue bags</CardDescription>
                                 </CardHeader>
                                 <CardContent className="space-y-4">
-                                    {[
-                                        { id: "new_order", label: "New order received", description: "Get notified when someone reserves a bag", enabled: true },
-                                        { id: "pickup", label: "Pickup confirmed", description: "When a customer picks up their bag", enabled: true },
-                                        { id: "cancelled", label: "Order cancelled", description: "When a reservation is cancelled", enabled: true },
-                                        { id: "daily", label: "Daily summary", description: "End of day summary of sales", enabled: false },
-                                    ].map((item) => (
-                                        <div key={item.id} className="flex items-start justify-between gap-4 py-2">
-                                            <div>
-                                                <Label htmlFor={item.id} className="text-white font-normal">
-                                                    {item.label}
-                                                </Label>
-                                                <p className="text-sm text-muted-foreground mt-0.5">
-                                                    {item.description}
-                                                </p>
-                                            </div>
-                                            <Switch id={item.id} defaultChecked={item.enabled} />
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <Label className="text-white font-normal">Auto-expire unsold bags</Label>
+                                            <p className="text-xs text-muted-foreground mt-0.5">Automatically mark bags as expired after pickup window</p>
                                         </div>
-                                    ))}
+                                        <Switch defaultChecked />
+                                    </div>
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <Label className="text-white font-normal">Show as available immediately</Label>
+                                            <p className="text-xs text-muted-foreground mt-0.5">New bags are visible to customers right away</p>
+                                        </div>
+                                        <Switch defaultChecked />
+                                    </div>
                                 </CardContent>
                             </Card>
 
-                            <div className="flex justify-end gap-3">
-                                <Button variant="outline" className="border-white/10 text-white hover:bg-white/5">
-                                    Cancel
-                                </Button>
-                                <Button onClick={handleSave} className="bg-accent hover:bg-accent-hover text-spare-bg">
-                                    <Save className="w-4 h-4 mr-2" />
-                                    {saved ? "Saved!" : "Save Changes"}
+                            <div className="flex justify-end">
+                                <Button onClick={handleSave} className="bg-pink hover:bg-pink-hover text-spare-bg">
+                                    {saved ? (
+                                        <>
+                                            <Check className="w-4 h-4 mr-2" />
+                                            Saved
+                                        </>
+                                    ) : (
+                                        <>
+                                            <Save className="w-4 h-4 mr-2" />
+                                            Save Changes
+                                        </>
+                                    )}
                                 </Button>
                             </div>
                         </>

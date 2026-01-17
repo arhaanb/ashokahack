@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Order } from "@/lib/types";
 import { mockOrders, formatCurrency, getCategoryLabel, formatTime } from "@/lib/mockData";
-import { Clock, CheckCircle, Package, DollarSign, User } from "lucide-react";
+import { User, Package } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function OrdersPage() {
@@ -76,54 +76,34 @@ export default function OrdersPage() {
                     ))}
                 </div>
 
-                {/* Summary Cards */}
+                {/* Summary Cards - Consistent with other pages */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <Card className="bg-spare-bg-light border-white/5">
-                        <CardContent className="pt-6 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-pink/10 flex items-center justify-center">
-                                <Package className="w-6 h-6 text-pink" />
-                            </div>
-                            <div>
-                                <p className="text-2xl font-bold text-white">{orders.length}</p>
-                                <p className="text-sm text-muted-foreground">Total Orders</p>
-                            </div>
+                        <CardContent className="p-5">
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Total Orders</p>
+                            <p className="text-2xl font-bold text-white">{orders.length}</p>
                         </CardContent>
                     </Card>
                     <Card className="bg-spare-bg-light border-white/5">
-                        <CardContent className="pt-6 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                                <Clock className="w-6 h-6 text-yellow-500" />
-                            </div>
-                            <div>
-                                <p className="text-2xl font-bold text-yellow-500">
-                                    {statusCounts.reserved + statusCounts.confirmed}
-                                </p>
-                                <p className="text-sm text-muted-foreground">Pending</p>
-                            </div>
+                        <CardContent className="p-5">
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Pending</p>
+                            <p className="text-2xl font-bold text-yellow-400">
+                                {statusCounts.reserved + statusCounts.confirmed}
+                            </p>
                         </CardContent>
                     </Card>
                     <Card className="bg-spare-bg-light border-white/5">
-                        <CardContent className="pt-6 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center">
-                                <CheckCircle className="w-6 h-6 text-green-500" />
-                            </div>
-                            <div>
-                                <p className="text-2xl font-bold text-green-500">{statusCounts.picked_up}</p>
-                                <p className="text-sm text-muted-foreground">Completed</p>
-                            </div>
+                        <CardContent className="p-5">
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Completed</p>
+                            <p className="text-2xl font-bold text-accent">{statusCounts.picked_up}</p>
                         </CardContent>
                     </Card>
                     <Card className="bg-spare-bg-light border-white/5">
-                        <CardContent className="pt-6 flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                                <DollarSign className="w-6 h-6 text-accent" />
-                            </div>
-                            <div>
-                                <p className="text-2xl font-bold text-accent">
-                                    {formatCurrency(orders.reduce((acc, o) => acc + o.price, 0))}
-                                </p>
-                                <p className="text-sm text-muted-foreground">Revenue</p>
-                            </div>
+                        <CardContent className="p-5">
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Revenue</p>
+                            <p className="text-2xl font-bold text-pink">
+                                {formatCurrency(orders.reduce((acc, o) => acc + o.price, 0))}
+                            </p>
                         </CardContent>
                     </Card>
                 </div>
@@ -135,27 +115,25 @@ export default function OrdersPage() {
                             <CardContent className="py-4">
                                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                                            <User className="w-5 h-5 text-accent" />
-                                        </div>
                                         <div>
-                                            <p className="font-semibold text-white">{order.consumerName}</p>
-                                            <p className="text-sm text-pink">{getCategoryLabel(order.bagCategory)}</p>
+                                            <p className="font-serif text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Customer</p>
+                                            <p className="font-bold text-white text-lg leading-tight">{order.consumerName}</p>
+                                            <p className="text-sm text-pink font-medium">{getCategoryLabel(order.bagCategory)}</p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center gap-6 text-sm">
-                                        <div className="text-center">
-                                            <p className="text-muted-foreground">Pickup</p>
-                                            <p className="font-medium text-white">{formatTime(order.pickupTime)}</p>
+                                    <div className="flex items-center gap-8 text-sm">
+                                        <div>
+                                            <p className="font-serif text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Pickup</p>
+                                            <p className="font-bold text-white">{formatTime(order.pickupTime)}</p>
                                         </div>
-                                        <div className="text-center">
-                                            <p className="text-muted-foreground">Code</p>
-                                            <p className="font-mono font-medium text-accent">{order.pickupCode}</p>
+                                        <div>
+                                            <p className="font-serif text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Code</p>
+                                            <p className="font-mono font-bold text-accent">{order.pickupCode}</p>
                                         </div>
-                                        <div className="text-center">
-                                            <p className="text-muted-foreground">Amount</p>
-                                            <p className="font-semibold text-accent">{formatCurrency(order.price)}</p>
+                                        <div>
+                                            <p className="font-serif text-[10px] uppercase tracking-wider text-muted-foreground mb-1">Amount</p>
+                                            <p className="font-bold text-accent">{formatCurrency(order.price)}</p>
                                         </div>
                                     </div>
 

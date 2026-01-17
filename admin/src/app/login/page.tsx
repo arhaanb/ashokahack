@@ -86,9 +86,7 @@ export default function LoginPage() {
 
                 <Card className="bg-spare-bg-light/80 backdrop-blur-sm border-white/10">
                     <CardHeader className="text-center pb-2">
-                        {/* Label in serif */}
                         <CardDescription className="font-serif">Sign in to your dashboard</CardDescription>
-                        {/* Title in sans, white */}
                         <CardTitle className="text-xl text-white">Welcome Back</CardTitle>
                     </CardHeader>
                     <CardContent>

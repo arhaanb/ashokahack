@@ -31,51 +31,47 @@ export default function DashboardPage() {
             />
 
             <div className="p-6 space-y-6">
-                {/* Stats Grid - Cleaner without icons */}
+                {/* Stats Grid - Consistent serif labels, sans values */}
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                     <Card className="bg-spare-bg-light border-white/5">
                         <CardContent className="p-5">
-                            <p className="text-sm text-muted-foreground mb-1">Today's Revenue</p>
-                            <p className="text-2xl font-bold text-accent">
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Today's Revenue</p>
+                            <p className="text-2xl font-bold text-pink">
                                 {formatCurrency(stats.todayRevenue)}
                             </p>
-                            <div className="flex items-center gap-1 mt-2 text-xs text-green-500">
-                                <TrendingUp className="w-3 h-3" />
-                                <span>+{stats.revenueChange}% from yesterday</span>
-                            </div>
+                            <p className="text-xs text-accent mt-2">
+                                +{stats.revenueChange}% from yesterday
+                            </p>
                         </CardContent>
                     </Card>
 
                     <Card className="bg-spare-bg-light border-white/5">
                         <CardContent className="p-5">
-                            <p className="text-sm text-muted-foreground mb-1">Bags Sold Today</p>
-                            <p className="text-2xl font-bold text-pink">{stats.bagsSoldToday}</p>
-                            <div className="flex items-center gap-1 mt-2 text-xs text-green-500">
-                                <TrendingUp className="w-3 h-3" />
-                                <span>+{stats.bagsChange}% from yesterday</span>
-                            </div>
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Bags Sold Today</p>
+                            <p className="text-2xl font-bold text-white">{stats.bagsSoldToday}</p>
+                            <p className="text-xs text-accent mt-2">
+                                +{stats.bagsChange}% from yesterday
+                            </p>
                         </CardContent>
                     </Card>
 
                     <Card className="bg-spare-bg-light border-white/5">
                         <CardContent className="p-5">
-                            <p className="text-sm text-muted-foreground mb-1">Average Rating</p>
-                            <p className="text-2xl font-bold text-yellow-500">{stats.averageRating.toFixed(1)}</p>
-                            <div className="flex items-center gap-1 mt-2 text-xs text-green-500">
-                                <TrendingUp className="w-3 h-3" />
-                                <span>+{stats.ratingChange} this week</span>
-                            </div>
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Average Rating</p>
+                            <p className="text-2xl font-bold text-yellow-400">{stats.averageRating.toFixed(1)}</p>
+                            <p className="text-xs text-accent mt-2">
+                                +{stats.ratingChange} this week
+                            </p>
                         </CardContent>
                     </Card>
 
                     <Card className="bg-spare-bg-light border-white/5">
                         <CardContent className="p-5">
-                            <p className="text-sm text-muted-foreground mb-1">Waste Saved</p>
-                            <p className="text-2xl font-bold text-green-500">{stats.wasteSaved} kg</p>
-                            <div className="flex items-center gap-1 mt-2 text-xs text-green-500">
-                                <TrendingUp className="w-3 h-3" />
-                                <span>+{stats.wasteChange}% this week</span>
-                            </div>
+                            <p className="text-sm text-muted-foreground font-serif mb-2">Waste Saved</p>
+                            <p className="text-2xl font-bold text-accent">{stats.wasteSaved} kg</p>
+                            <p className="text-xs text-accent mt-2">
+                                +{stats.wasteChange}% this week
+                            </p>
                         </CardContent>
                     </Card>
                 </div>
