@@ -19,8 +19,15 @@ export const auth = betterAuth({
     emailAndPassword: {
         enabled: true,
         // Custom password verification for mock data
-        async verifyPassword(password: string, hash: string) {
-            return password === hash; // Simple comparison for mock
+        password: {
+            hash: async (password: string) => {
+                // For mock data, we store plain text, so just return it
+                return password;
+            },
+            verify: async (opts: { hash: string; password: string }) => {
+                // Simple comparison for mock data
+                return opts.password === opts.hash;
+            },
         },
     },
     
@@ -37,7 +44,9 @@ export const auth = betterAuth({
     
     // Advanced configuration for mock users
     advanced: {
-        generateId: () => crypto.randomUUID(),
+        database: {
+            generateId: () => crypto.randomUUID(),
+        },
     },
 });
 

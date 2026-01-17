@@ -2,11 +2,10 @@
 export { Button } from "./button";
 export type { ButtonProps } from "./button";
 
-export { Badge, StatusBadge } from "./badge";
-export type { BadgeProps, StatusBadgeProps } from "./badge";
+export { Badge } from "./badge";
+export type { BadgeProps } from "./badge";
 
-export { Card, StatCard } from "./card";
-export type { CardProps, StatCardProps } from "./card";
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent } from "./card";
 
 export { DataTable } from "./DataTable";
 export type { DataTableProps, Column } from "./DataTable";

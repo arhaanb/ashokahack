@@ -2,7 +2,9 @@ import * as React from "react"
 
 import { cn } from "@/lib/utils"
 
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+export interface InputProps extends React.ComponentProps<"input"> {}
+
+const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
     return (
       <input
@@ -19,4 +21,20 @@ const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
 )
 Input.displayName = "Input"
 
-export { Input }
+export interface SearchInputProps extends InputProps {}
+
+const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <Input
+        type="search"
+        className={cn("pr-8", className)}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+SearchInput.displayName = "SearchInput"
+
+export { Input, SearchInput }
