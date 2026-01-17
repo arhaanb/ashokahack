@@ -50,8 +50,10 @@ export function Sidebar() {
                     </svg>
                 </div>
                 <div className="flex flex-col gap-0.5">
-                    <span className="text-lg font-bold text-accent truncate">{restaurantName}</span>
-                    <span className="text-xs text-muted-foreground">Powered by Spare</span>
+                    {/* Brand name in serif, muted */}
+                    <span className="text-xs text-muted-foreground font-serif">Powered by Spare</span>
+                    {/* Restaurant name in sans-serif, pink */}
+                    <span className="text-lg font-bold text-pink truncate">{restaurantName}</span>
                 </div>
             </div>
 

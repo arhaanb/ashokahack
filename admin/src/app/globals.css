@@ -1,5 +1,70 @@
 @import "tailwindcss";
 
+/* Custom Fonts */
+@font-face {
+  font-family: 'Gargoyle';
+  src: url('/fonts/gargoyle/OPTIGargoyle-Normal.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gargoyle';
+  src: url('/fonts/gargoyle/OPTIGargoyle-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Heavy.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Spare Brand Colors */
   --color-spare-bg: #0D3B2E;
@@ -40,7 +105,9 @@
   --radius-md: 0.5rem;
   --radius-sm: 0.25rem;
 
-  --font-sans: 'Inter', system-ui, sans-serif;
+  /* Font Families */
+  --font-sans: 'Saans', system-ui, sans-serif;
+  --font-serif: 'Gargoyle', Georgia, serif;
 }
 
 @layer base {
@@ -49,11 +116,33 @@
   }
 
   body {
-    @apply bg-spare-bg text-foreground font-sans antialiased;
+    @apply bg-spare-bg text-foreground antialiased;
+    font-family: var(--font-sans);
   }
-  button, [role="button"] {
+
+  button,
+  [role="button"] {
     cursor: pointer;
   }
+
+  /* Heading styles - serif font with pink color for hierarchy */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-serif);
+  }
+}
+
+/* Utility classes for fonts */
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
 }
 
 /* Custom scrollbar */

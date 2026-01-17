@@ -95,14 +95,18 @@ export default function LoginPage() {
                             />
                         </svg>
                     </div>
+                    {/* Brand in serif, muted */}
+                    <p className="text-sm text-muted-foreground font-serif mb-1">Food Rescue Dashboard</p>
+                    {/* App name in sans, accent */}
                     <h1 className="text-3xl font-bold text-accent">Spare</h1>
+                    {/* Restaurant in pink */}
                     <p className="text-lg text-pink mt-1">Baker&apos;s Oven</p>
                 </div>
 
                 <Card className="bg-spare-bg-light/80 backdrop-blur-sm border-white/10">
                     <CardHeader className="text-center pb-2">
-                        <CardTitle className="text-xl text-white">Sign In</CardTitle>
-                        <CardDescription>Enter your credentials to continue</CardDescription>
+                        <CardTitle className="text-xl text-white font-sans">Sign In</CardTitle>
+                        <CardDescription className="font-serif">Enter your credentials to continue</CardDescription>
                     </CardHeader>
                     <CardContent>
                         <form onSubmit={handleLogin} className="space-y-4">
@@ -197,8 +201,8 @@ export default function LoginPage() {
                     </CardContent>
                 </Card>
 
-                <p className="text-center text-xs text-muted-foreground mt-6">
-                    Powered by <span className="text-accent font-medium">Spare</span> • Food Rescue Marketplace
+                <p className="text-center text-xs text-muted-foreground mt-6 font-serif">
+                    Powered by <span className="text-accent font-sans font-medium">Spare</span> • Food Rescue Marketplace
                 </p>
             </div>
         </div>
