@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'Gargoyle';
+  src: url('/fonts/gargoyle/OPTIGargoyle-Normal.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Gargoyle';
+  src: url('/fonts/gargoyle/OPTIGargoyle-Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Saans';
+  src: url('/fonts/saans/Saans-TRIAL-Heavy.woff2') format('woff2');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Spare Brand Colors */
+  --color-spare-bg: #0D3B2E;
+  --color-spare-bg-light: #145242;
+  --color-spare-bg-dark: #082820;
+
+  --color-accent: #B8E03F;
+  --color-accent-hover: #A5CC2F;
+  --color-accent-light: #D4F06F;
+
+  --color-pink: #E88BC3;
+  --color-pink-hover: #D67AB2;
+  --color-pink-light: #F5B8DC;
+
+  --color-leaf-dark: #2A7D4F;
+  --color-leaf-light: #A8D84A;
+
+  /* Shadcn compatible colors */
+  --color-background: #0D3B2E;
+  --color-foreground: #FFFFFF;
+  --color-card: #145242;
+  --color-card-foreground: #FFFFFF;
+  --color-popover: #082820;
+  --color-popover-foreground: #FFFFFF;
+  --color-primary: #B8E03F;
+  --color-primary-foreground: #0D3B2E;
+  --color-secondary: #E88BC3;
+  --color-secondary-foreground: #0D3B2E;
+  --color-muted: #1f4d3d;
+  --color-muted-foreground: #9CA3AF;
+  --color-destructive: #F87171;
+  --color-destructive-foreground: #FFFFFF;
+  --color-border: rgba(255, 255, 255, 0.1);
+  --color-input: #145242;
+  --color-ring: #B8E03F;
+
+  --radius-lg: 0.75rem;
+  --radius-md: 0.5rem;
+  --radius-sm: 0.25rem;
+
+  /* Font Families */
+  --font-sans: 'Saans', system-ui, sans-serif;
+  --font-serif: 'Gargoyle', Georgia, serif;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-spare-bg text-foreground antialiased;
+    font-family: var(--font-sans);
+  }
+
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+}
+
+/* Utility classes for fonts */
+.font-serif {
+  font-family: var(--font-serif) !important;
+}
+
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-spare-bg-dark);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-leaf-dark);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
+}
